@@ -1,0 +1,5 @@
+<div *ngFor="let book of books">
+    <app-book-item [book]="book"></app-book-item>
+    <button (click)="edit(book.id)">Edit</button>
+    <button (click)="delete(book.id)">Delete</button>
+  </div>
