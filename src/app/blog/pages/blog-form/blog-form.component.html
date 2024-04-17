@@ -1,0 +1,36 @@
+<form [formGroup]="blogForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="title">Title:</label>
+      <input type="text" id="title" formControlName="title">
+      <div *ngIf="nameControl.invalid && (nameControl.dirty || nameControl.touched)">
+        <small *ngIf="nameControl.errors?.['required']">Title is required.</small>
+      </div>
+    </div>
+    <div>
+      <label for="description">Description:</label>
+      <textarea id="description" formControlName="description"></textarea>
+      <div *ngIf="descriptionControl.invalid && (descriptionControl.dirty || descriptionControl.touched)">
+        <small *ngIf="descriptionControl.errors?.['required']">Description is required.</small>
+      </div>
+    </div>
+    <div>
+      <label for="author">Author:</label>
+      <input type="text" id="author" formControlName="author">
+      <div *ngIf="authorControl.invalid && (authorControl.dirty || authorControl.touched)">
+        <small *ngIf="authorControl.errors?.['required']">Author is required.</small>
+      </div>
+    </div>
+    <div formArrayName="comments">
+      <div *ngFor="let commentControl of comments.controls; let i = index">
+        <label for="comment{{ i }}">Comment {{ i + 1 }}:</label>
+        <textarea id="comment{{ i }}" [formControlName]="i"></textarea>
+        <div *ngIf="commentControl.invalid && (commentControl.dirty || commentControl.touched)">
+          <small *ngIf="commentControl.errors?.['required']">Comment is required.</small>
+        </div>
+      </div>
+    </div>
+    <div>
+      <button type="button" (click)="addComment()">Add Comment</button>
+    </div>
+    <button type="submit">Submit</button>
+  </form>

@@ -3,17 +3,24 @@ import { CommonModule } from '@angular/common';
 import { BookListComponent } from './pages/book-list/book-list.component';
 import { BookItemComponent } from './components/book-item/book-item.component';
 import { BookRoutingModule } from './book-routing.module';
+import { CommandBarComponent } from '../shared/components/command-bar/command-bar.component';
+import { SharedModule } from '../shared/shared.module';
+import { BookFormComponent } from './pages/book-form/book-form.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
 @NgModule({
   declarations: [
     BookListComponent,
-    BookItemComponent
+    BookItemComponent,
+    BookFormComponent
   ],
   imports: [
     CommonModule,
-    BookRoutingModule
+    BookRoutingModule,
+    SharedModule,
+    ReactiveFormsModule
   ]
 })
 export class BookModule { }

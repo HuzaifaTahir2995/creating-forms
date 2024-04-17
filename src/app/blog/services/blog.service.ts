@@ -14,4 +14,20 @@ export class BlogService {
   getBlogs(): Blog[] {
     return this.blogs;
   }
+  getBlogById(id: number): Blog | undefined {
+    return this.blogs.find(blog => blog.id === id);
+  }
+  updateBlog(id: number, updatedBlog: Blog): void {
+    const index = this.blogs.findIndex(blog => blog.id === id);
+    if (index !== -1) {
+      this.blogs[index] = { ...updatedBlog, id: this.blogs[index].id };
+    }
+  }
+  addBlog(newBlog: Omit<Blog, 'id'>): void {
+    const maxId = Math.max(...this.blogs.map(blog => blog.id));
+    const id = maxId >= 0 ? maxId + 1 : 1; 
+    const blogWithId: Blog = { ...newBlog, id };
+    this.blogs.push(blogWithId);
+  }
 }
+

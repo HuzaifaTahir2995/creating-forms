@@ -1,5 +1,10 @@
+<app-header></app-header>
 <div *ngFor="let blog of blogs">
     <app-blog-item [blog]="blog"></app-blog-item>
     <button (click)="edit(blog.id)">Edit</button>
     <button (click)="delete(blog.id)">Delete</button>
   </div>
+  <br>
+  <br>
+  <br>
+  <app-command-bar (add)="addBlog()" (deleteAll)="deleteAllBlogs()"></app-command-bar>

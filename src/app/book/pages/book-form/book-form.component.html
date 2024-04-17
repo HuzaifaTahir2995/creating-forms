@@ -1,0 +1,26 @@
+<form [formGroup]="bookForm" (ngSubmit)="onSubmit()">
+    <div>
+        <label for="name">Name:</label>
+        <input type="text" id="name" [formControl]="nameControl">
+        <div *ngIf="nameControl?.invalid && (nameControl?.dirty || nameControl?.touched)">
+          <small *ngIf="nameControl?.errors?.['required']">Name is required.</small>
+        </div>
+      </div>
+    <div formArrayName="authors">
+      <div *ngFor="let author of authorControls; let i = index">
+        <label for="author{{ i }}">Author {{ i + 1 }}:</label>
+        <input type="text" [id]="'author' + i" [formControlName]="i">
+      </div>
+    </div>
+    <div>
+      <button type="button" (click)="addAuthor()">Add Author</button>
+    </div>
+    <div>
+      <label for="isbn">ISBN:</label>
+      <input type="text" id="isbn" formControlName="isbn">
+      <div *ngIf="bookForm.get('isbn')?.invalid && (bookForm.get('isbn')?.dirty || bookForm.get('isbn')?.touched)">
+        <small *ngIf="bookForm.get('isbn')?.errors?.['required']">ISBN is required.</small>
+      </div>
+    </div>
+    <button type="submit">Submit</button>
+  </form>
